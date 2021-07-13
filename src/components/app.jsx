@@ -6,20 +6,23 @@ import giphy from 'giphy-api';
 
 class App extends Component {
 
-  constructor(props) {            // Toujours un constructor
+  constructor(props) {
     super(props);
 
     this.state = {
-      gifs: [
-        {id: "cOzyUgoJljvhut2G0E"},
-        {id: "RPgxgjXkn5LwofcwQu"}
-      ],
+      gifs: [],
       selectedGifId: "cOzyUgoJljvhut2G0E"
     };
 
     this.search("homer thinking");
 
   }
+
+  select = (id) => {
+    this.setState({
+      selectedGifId : id
+    })
+  };
 
   search = (query) => {
     giphy('A3V75NFBkNhb8HlqeJLJSCAmwiF7Yp3s').search({
@@ -43,7 +46,7 @@ class App extends Component {
           </div>
         </div>
         <div className="right-scene">
-          <GifList gifs={this.state.gifs}/>
+          <GifList selectFunction = {this.select} gifs={this.state.gifs}/>
         </div>
       </div>
     )
